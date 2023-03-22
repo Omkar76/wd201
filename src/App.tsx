@@ -1,4 +1,4 @@
-import TaskCard from "./TaskCard.jsx"
+import TaskCard from "./TaskCard"
 import './index.css'
 import DateUtil from "./DateUtil"
 
