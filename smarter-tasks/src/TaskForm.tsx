@@ -46,7 +46,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           ) as unknown as Task;
 
           task.dueDate = new Date(task.dueDate); //convert string to date type
-          
+
           this.props.addTask(task);
           form.reset();
         }}
@@ -64,7 +64,6 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         />
         <label htmlFor="todoDescription">Description</label>
         <textarea
-          required
           name="description"
           id="todoDescription"
           className="h-40 grow p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500"
