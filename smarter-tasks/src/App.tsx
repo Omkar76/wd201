@@ -26,27 +26,27 @@ class App extends React.Component<TaskAppProp, TaskAppState> {
           assigneeName: "Kekeh",
         },
       ],
-    };  
+    };
   }
 
-  addTask = (value: string) => {
+  addTask = (task: Task) => {
     this.setState({
-      tasks: [
-        ...this.state.tasks,
-        { title: value, dueDate: DateUtil.today, assigneeName: "Anon" },
-      ],
+      tasks: [...this.state.tasks, task],
     });
   };
   render() {
     return (
       <>
-      <h1 className="text-white text-3xl border-b border-b-violet-500 p-4 font-bold bg-black">YetAnotherTodoList</h1>
+        <h1 className="text-white text-3xl border-b border-b-violet-500 p-4 font-bold bg-black">
+          YetAnotherTodoList
+        </h1>
 
-      <div className="mt-5 m-auto max-w-lg p-4">
-        <TaskForm addTask={this.addTask} />
-        <hr className="mt-4 mb-4" />
-        <TaskList tasks={this.state.tasks}/>
-      </div></>
+        <div className="mt-5 m-auto max-w-lg p-4">
+          <TaskForm addTask={this.addTask} />
+          <hr className="mt-4 mb-4" />
+          <TaskList tasks={this.state.tasks} />
+        </div>
+      </>
     );
   }
 }

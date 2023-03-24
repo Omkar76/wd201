@@ -5,6 +5,7 @@ export interface Task {
   dueDate: Date;
   completedAtDate?: Date;
   assigneeName: string;
+  description?: string;
 }
 
 interface TaskState {}
@@ -13,11 +14,15 @@ class TaskCard extends React.Component<Task, TaskState> {
   constructor(props: Task) {
     super(props);
   }
+
   render() {
-    const { title, dueDate, completedAtDate, assigneeName } = this.props;
+    const { title, dueDate, completedAtDate, assigneeName, description } =
+      this.props;
+
     return (
       <div className="TaskItem bg-gray-800 text-white p-2 rounded m-1 border-2 border-violet-500">
         <h2 className="text-xl font-bold">{title}</h2>
+        <p>{description}</p>
         {completedAtDate && (
           <p>Completed on: {completedAtDate.toLocaleDateString("en-IN")}</p>
         )}
