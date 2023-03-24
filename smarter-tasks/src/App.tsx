@@ -17,11 +17,13 @@ class App extends React.Component<TaskAppProp, TaskAppState> {
       tasks: [
         {
           title: "Build the website with static content",
+          description : "Build a static website and deploy it on netlify",
           dueDate: DateUtil.tommorrow,
           assigneeName: "Kekeh",
         },
         {
           title: "Add a blog",
+          description : "Share ideas with a blog",
           dueDate: DateUtil.today,
           assigneeName: "Kekeh",
         },

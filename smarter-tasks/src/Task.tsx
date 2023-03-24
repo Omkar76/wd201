@@ -1,5 +1,5 @@
 import React from "react";
-
+import {UserIcon, CalendarIcon} from  '@heroicons/react/24/solid'
 export interface Task {
   title: string;
   dueDate: Date;
@@ -22,14 +22,27 @@ class TaskCard extends React.Component<Task, TaskState> {
     return (
       <div className="TaskItem bg-gray-800 text-white p-2 rounded m-1 border-2 border-violet-500">
         <h2 className="text-xl font-bold">{title}</h2>
-        <p>{description}</p>
+        <p className="font-sans">{description}</p>
+        <div className="flex gap-3 mt-2">
         {completedAtDate && (
-          <p>Completed on: {completedAtDate.toLocaleDateString("en-IN")}</p>
+             <div>  
+             <CalendarIcon className="h-6 w-6 text-violet-600 inline mr-2"/>
+             <i>Completed on:</i> {completedAtDate.toLocaleDateString("en-IN")}
+           </div>
         )}
+
         {!completedAtDate && (
-          <p>Due on : {dueDate.toLocaleDateString("en-IN")}</p>
+          <div>  
+             <CalendarIcon className="h-6 w-6 text-violet-600 inline mr-2"/>
+             <i>Due on:</i> {dueDate.toLocaleDateString("en-IN")}
+           </div>
         )}
-        <p>Assignee: {assigneeName}</p>
+
+        <div>  
+          <UserIcon className="h-6 w-6 text-violet-600 inline mr-2"/>
+           <i>Assignee: </i> {assigneeName}
+        </div>
+        </div>
       </div>
     );
   }
