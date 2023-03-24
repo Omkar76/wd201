@@ -69,7 +69,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           className="h-40 grow p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500"
         ></textarea>
 
-        <input type="hidden" name="assigneeName" value="Kekeh"/>
+        <input type="hidden" name="assigneeName" value="Kekeh" />
         <label htmlFor="todoDueDate">Due Date</label>
         <input
           name="dueDate"

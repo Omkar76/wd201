@@ -7,7 +7,6 @@ interface TaskListProps {
 
 interface TaskListState {}
 class TaskList extends React.Component<TaskListProps, TaskListState> {
-
   render() {
     return this.props.tasks.map((task: Task) => <TaskCard {...task} />);
   }
