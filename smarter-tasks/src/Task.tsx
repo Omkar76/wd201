@@ -20,7 +20,7 @@ class TaskCard extends React.Component<Task, TaskState> {
       this.props;
 
     return (
-      <div className="TaskItem bg-gray-800 text-white p-2 rounded m-1 border-2 border-violet-500">
+      <div className="TaskItem bg-gray-800 text-white p-4 rounded mt-3 mb-3 border-2 border-violet-500">
         <h2 className="text-xl font-bold">{title}</h2>
         <p className="font-sans">{description}</p>
 
@@ -31,7 +31,7 @@ class TaskCard extends React.Component<Task, TaskState> {
             <div>
               {completedAtDate ? (
                 <>
-                  <i>Completed on:</i>{" "}
+                  <i>Completed on: </i>{
                   {completedAtDate.toLocaleDateString("en-IN")}
                 </>
               ) : (
