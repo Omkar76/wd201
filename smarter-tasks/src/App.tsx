@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import DateUtil from "./DateUtil";
-import TaskCard, { Task } from "./Task";
+import { Task } from "./Task";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
@@ -40,7 +39,7 @@ class App extends React.Component<TaskAppProp, TaskAppState> {
     return (
       <>
         <h1 className="text-violet-600 border-b border-b-violet-500 p-4 font-bold bg-black text-2xl md:text-3xl sticky top-0">
-          <img src="/favicon.svg" className="inline w-6 md:w-10" />{" "}
+          <img src="/favicon.svg" alt="YATL Logo" className="inline w-6 md:w-10" />{" "}
           YetAnotherTodoList
         </h1>
 
