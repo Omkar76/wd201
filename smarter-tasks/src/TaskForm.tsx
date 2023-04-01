@@ -54,6 +54,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         <input type="hidden" name="assigneeName" value="Kekeh" />
         <label htmlFor="todoDueDate">Due Date</label>
         <input
+          required
           name="dueDate"
           id="todoDueDate"
           type="date"
