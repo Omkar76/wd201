@@ -1,5 +1,6 @@
-import React, { LegacyRef } from "react";
+import React from "react";
 import { Task } from "./Task";
+
 interface TaskFormProps {
   addTask: (task: Task) => void;
 }
@@ -12,25 +13,6 @@ type TaskFormState = Task;
 // }
 
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
-  // addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
-  //     event.preventDefault();
-  //     console.log("Submitted the form!");
-  //   };
-  // inputRef: LegacyRef<HTMLFormElement> | undefined;
-
-  // static initialState : Task = {
-  //   title: "",
-  //   description: "",
-  //   dueDate : "",
-  //   assigneeName : "Kekeh"
-  // };
-
-  constructor(props: TaskFormProps) {
-    super(props);
-
-    // this.state = TaskForm.initialState;
-  }
-
   render() {
     return (
       <form

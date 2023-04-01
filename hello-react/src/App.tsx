@@ -1,5 +1,4 @@
 import TaskCard from "./TaskCard"
-import './index.css'
 import DateUtil from "./DateUtil"
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
   }];
 
   return (
-    <div className="flex flex-row max-w-lg m-auto ">
+    <div className="flex flex-row m-auto justify-center">
       <div className="m-5">
         <h1 className="text-2xl font-bold">Pending tasks</h1>
         {

@@ -11,9 +11,6 @@ export interface Task {
 interface TaskState {}
 
 class TaskCard extends React.Component<Task, TaskState> {
-  constructor(props: Task) {
-    super(props);
-  }
 
   render() {
     const { title, dueDate, completedAtDate, assigneeName, description } =
