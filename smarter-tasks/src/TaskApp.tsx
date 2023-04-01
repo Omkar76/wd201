@@ -1,5 +1,5 @@
 import React from "react";
-import DateUtil from "./DateUtil";
+// import DateUtil from "./DateUtil";
 import { Task } from "./Task";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
@@ -14,18 +14,18 @@ class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
     super(props);
     this.state = {
       tasks: [
-        {
-          title: "Build the website with static content",
-          description: "Build a static website and deploy it on netlify",
-          dueDate: DateUtil.tommorrow,
-          assigneeName: "Kekeh",
-        },
-        {
-          title: "Add a blog",
-          description: "Share ideas with a blog",
-          dueDate: DateUtil.today,
-          assigneeName: "Kekeh",
-        },
+        // {
+        //   title: "Build the website with static content",
+        //   description: "Build a static website and deploy it on netlify",
+        //   dueDate: DateUtil.tommorrow,
+        //   assigneeName: "Kekeh",
+        // },
+        // {
+        //   title: "Add a blog",
+        //   description: "Share ideas with a blog",
+        //   dueDate: DateUtil.today,
+        //   assigneeName: "Kekeh",
+        // },
       ],
     };
   }
