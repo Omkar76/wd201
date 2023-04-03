@@ -61,7 +61,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           className="grow p-2 border rounded-lg outline-none bg-gray-800 text-white uppercase border-violet-500"
         />
         <button
-          id="addTaskButtons"
+          id="addTaskButton"
           type="submit"
           className="bg-black text-white p-2 border rounded-lg font-bold uppercase border-violet-500"
         >
