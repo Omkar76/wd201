@@ -24,25 +24,25 @@ function App() {
   const pendingTasks = [{
     title: "Build the website with static content",
     dueDate: DateUtil.tommorrow,
-    assigneeName: "Rohit S"
+    assigneeName: "Kekeh S"
   },
   {
     title: "Add a blog",
     dueDate: DateUtil.today,
-    assigneeName: "Rohit M "
+    assigneeName: "Kekeh M "
   }];
 
   const doneTasks = [{
     title: "Build the website with static content",
     dueDate: DateUtil.tommorrow,
     completedAtDate: DateUtil.yesterday,
-    assigneeName: "Rohit M"
+    assigneeName: "Kekeh M"
   },
   {
     title: "Get the approval from principal",
     dueDate: DateUtil.today,
     completedAtDate: DateUtil.yesterday,
-    assigneeName: "Rohit M"
+    assigneeName: "Bro please"
   }];
 
   return (
