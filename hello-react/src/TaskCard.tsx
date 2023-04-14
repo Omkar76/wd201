@@ -15,9 +15,9 @@ const TaskCard: React.FC<Task> = (props) => {
       {props.completedAtDate &&
         <p>Completed on: {props.completedAtDate.toLocaleDateString("en-IN")}</p>
       }
-      {!props.completedAtDate && <p>Due on : {props.dueDate.toLocaleDateString("en-IN")}</p>}
+      {!props.completedAtDate && props.dueDate && <p>Due on : {props.dueDate.toLocaleDateString("en-IN")}</p>}
       <p>Assignee: {props.assigneeName}</p>
-    </div>
+    </div>  
   )
 }
 
