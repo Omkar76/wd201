@@ -2,9 +2,9 @@ import './TaskCard.css'
 
 interface Task {
   title: string
-  dueDate: Date
+  dueDate?: Date
   completedAtDate?: Date
-  assigneeName: string
+  assigneeName?: string
 }
 
 const TaskCard: React.FC<Task> = (props) => {
