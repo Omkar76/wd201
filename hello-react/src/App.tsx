@@ -3,7 +3,7 @@ class DateUtil {
   static _oneday = 60 * 60 * 24 * 1000;
 
   static format(date : Date) {
-    return date.toLocaleDateString("en-CA");
+    return date.toLocaleDateString("en-IN", {day : "numeric", month : "long" });
   }
 
   static get today() {
@@ -23,25 +23,25 @@ class DateUtil {
 function App() {
   const pendingTasks = [{
     title: "Build the website with static content",
-    dueDate: DateUtil.tommorrow,
+    dueDate: DateUtil.format(DateUtil.tommorrow),
     assigneeName: "Kekeh S"
   },
   {
     title: "Add a blog",
-    dueDate: DateUtil.today,
+    dueDate: DateUtil.format(DateUtil.today),
     assigneeName: "Kekeh M "
   }];
 
   const doneTasks = [{
     title: "Build the website with static content",
-    dueDate: DateUtil.tommorrow,
-    completedAtDate: DateUtil.yesterday,
+    dueDate: DateUtil.format(DateUtil.tommorrow),
+    completedAtDate: DateUtil.format(DateUtil.yesterday),
     assigneeName: "Kekeh M"
   },
   {
     title: "Get the approval from principal",
     // dueDate: DateUtil.today,
-    completedAtDate: DateUtil.yesterday,
+    completedAtDate: DateUtil.format(DateUtil.yesterday),
     assigneeName: "Bro please"
   }];
 
