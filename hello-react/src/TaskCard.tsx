@@ -1,7 +1,7 @@
 import './TaskCard.css'
 
 interface Task {
-  title: string
+  title?: string
   dueDate?: string
   completedAtDate?: string
   assigneeName?: string
