@@ -27,7 +27,7 @@ function App() {
     assigneeName: "Kekeh S"
   },
   {
-    title: "Add a blog",
+    // title: "Add a blog",
     dueDate: DateUtil.format(DateUtil.today),
     assigneeName: "Kekeh M "
   }];
@@ -36,12 +36,12 @@ function App() {
     title: "Build the website with static content",
     dueDate: DateUtil.format(DateUtil.tommorrow),
     completedAtDate: DateUtil.format(DateUtil.yesterday),
-    assigneeName: "Kekeh M"
+    // assigneeName: "Kekeh M"
   },
   {
     title: "Get the approval from principal",
-    // dueDate: DateUtil.today,
-    completedAtDate: DateUtil.format(DateUtil.yesterday),
+    // dueDate: "22nd March",
+    completedAtDate: "22nd March",
     assigneeName: "Bro please"
   }];
 
@@ -57,7 +57,7 @@ function App() {
         <h1 className="text-2xl font-bold">Done tasks</h1>
         {
           doneTasks.map(task => <TaskCard {...task} />)
-        }
+        }~
       </div>
 
     </div>
