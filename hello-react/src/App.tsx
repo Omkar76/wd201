@@ -1,4 +1,5 @@
-import TaskCard from "./TaskCard"
+import TaskCard from "./TaskCard";
+import {Task} from "./TaskCard"
 class DateUtil {
   static _oneday = 60 * 60 * 24 * 1000;
 
@@ -21,29 +22,33 @@ class DateUtil {
 
 
 function App() {
-  const pendingTasks = [{
-    title: "Build the website with static content",
-    dueDate: DateUtil.format(DateUtil.tommorrow),
-    assigneeName: "Kekeh S"
-  },
-  {
-    // title: "Add a blog",
-    dueDate: DateUtil.format(DateUtil.today),
-    assigneeName: "Kekeh M "
-  }];
+  const pendingTasks : Task[] = [
+    // {
+    //   title: "Build the website with static content",
+    //   dueDate: DateUtil.format(DateUtil.tommorrow),
+    //   assigneeName: "Kekeh S"
+    // },
+    // {
+    //   // title: "Add a blog",
+    //   dueDate: DateUtil.format(DateUtil.today),
+    //   assigneeName: "Kekeh M "
+    // }
+  ];
 
-  const doneTasks = [{
-    title: "Build the website with static content",
-    dueDate: DateUtil.format(DateUtil.tommorrow),
-    completedAtDate: DateUtil.format(DateUtil.yesterday),
-    // assigneeName: "Kekeh M"
-  },
-  {
-    title: "Get the approval from principal",
-    // dueDate: "22nd March",
-    completedAtDate: "22nd March",
-    assigneeName: "Bro please"
-  }];
+  const doneTasks : Task[] = [
+  //   {
+  //   title: "Build the website with static content",
+  //   dueDate: DateUtil.format(DateUtil.tommorrow),
+  //   completedAtDate: DateUtil.format(DateUtil.yesterday),
+  //   // assigneeName: "Kekeh M"
+  // },
+  // {
+  //   title: "Get the approval from principal",
+  //   // dueDate: "22nd March",
+  //   completedAtDate: "22nd March",
+  //   assigneeName: "Bro please"
+  // }
+];
 
   return (
     <div className="flex flex-row m-auto justify-center">
@@ -57,7 +62,7 @@ function App() {
         <h1 className="text-2xl font-bold">Done tasks</h1>
         {
           doneTasks.map(task => <TaskCard {...task} />)
-        }~
+        }
       </div>
 
     </div>
