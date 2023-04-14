@@ -23,6 +23,11 @@ class DateUtil {
 
 function App() {
   const pendingTasks : Task[] = [
+    {
+      title: "Finish React course",
+      dueDate: "20th April",
+      assigneeName: "Vignesh Rajendran",
+    }
     // {
     //   title: "Build the website with static content",
     //   dueDate: DateUtil.format(DateUtil.tommorrow),
@@ -49,7 +54,13 @@ function App() {
   //   assigneeName: "Bro please"
   // }
 ];
+const props = {
+  title: "Finish React course",
+  dueDate: "20th April",
+  assigneeName: "Vignesh Rajendran",
+};
 
+// cy.mount();
   return (
     <div className="flex flex-row m-auto justify-center">
       <div className="m-5">
@@ -61,7 +72,8 @@ function App() {
       <div className="m-5">
         <h1 className="text-2xl font-bold">Done tasks</h1>
         {
-          doneTasks.map(task => <TaskCard {...task} />)
+          <TaskCard {...props} />
+          // doneTasks.map(task => <TaskCard {...task} />)
         }
       </div>
 
