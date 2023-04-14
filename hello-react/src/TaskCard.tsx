@@ -1,6 +1,6 @@
 import './TaskCard.css'
 
-interface Task {
+export interface Task {
   title?: string
   dueDate?: string
   completedAtDate?: string
