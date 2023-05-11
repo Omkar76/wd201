@@ -1,26 +1,37 @@
 import React from "react";
-import { UserIcon, CalendarIcon } from "@heroicons/react/24/solid";
-export interface Task {
+import { UserIcon, CalendarIcon, TrashIcon } from "@heroicons/react/24/solid";
+export interface TaskItem {
+  id : number;
   title: string;
-  dueDate: Date;
-  completedAtDate?: Date;
+  dueDate: string;
+  completedAtDate?: string;
   assigneeName: string;
   description?: string;
 }
 
-interface TaskState {}
+export type TaskProps = {
+  task : TaskItem
+  deleteTask : (taskID : number) => void
+} 
 
-class TaskCard extends React.Component<Task, TaskState> {
-
-  render() {
-    const { title, dueDate, completedAtDate, assigneeName, description } =
-      this.props;
+const TaskFC: React.FC<TaskProps> = (props) =>{
+    const {
+      task : { id, title, dueDate, completedAtDate, assigneeName, description}, 
+      deleteTask 
+    } = props;
 
     return (
-      <div className="TaskItem bg-gray-800 text-white p-4 rounded mt-3 mb-3 shadow shadow-black border-violet-500">
-        <h2 className="text-xl font-bold">{title}</h2>
-        <p className="font-sans">{description}</p>
+      <li className="list-none TaskItem bg-gray-800 text-white p-4 rounded mt-3 mb-3 shadow shadow-black border-violet-500">
+        <div className="flex flex-row justify-between">
+          <div>
+          <h2 className="text-xl font-bold">{title}</h2>
+          <p className="font-sans">{description}</p>
+          </div>
 
+          <button onClick={()=>deleteTask(id)}>
+          <TrashIcon className="h-6 w-6 text-violet-600 inline mr-2 deleteTaskButton"/>
+          </button>
+        </div>
         <div className="flex gap-3 mt-2 justify-between">
           {/* Date */}
           <div className="flex flex-wrap justify-center">
@@ -29,11 +40,11 @@ class TaskCard extends React.Component<Task, TaskState> {
               {completedAtDate ? (
                 <>
                   <i>Completed on: </i>
-                  {completedAtDate.toLocaleDateString("en-IN")}
+                  {new Date(completedAtDate).toLocaleDateString("en-IN")}
                 </>
               ) : (
                 <>
-                  <i>Due on:</i> {dueDate.toLocaleDateString("en-IN")}
+                  <i>Due on:</i> {new Date(dueDate).toLocaleDateString("en-IN")}
                 </>
               )}
             </div>
@@ -47,9 +58,8 @@ class TaskCard extends React.Component<Task, TaskState> {
             </div>
           </div>
         </div>
-      </div>
+      </li>
     );
-  }
 }
 // const TaskCard: React.FC<Task> = (props) => {
 
@@ -65,4 +75,4 @@ class TaskCard extends React.Component<Task, TaskState> {
 //     )
 // }
 
-export default TaskCard;
+export default TaskFC;

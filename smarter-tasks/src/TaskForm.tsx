@@ -1,19 +1,15 @@
-import React from "react";
-import { Task } from "./Task";
+import { TaskItem } from "./Task";
+import {useID} from "./hooks/useID"
 
 interface TaskFormProps {
-  addTask: (task: Task) => void;
+  addTask: (task: TaskItem) => void;
 }
 
-type TaskFormState = Task;
-// {
-//   title: string;
-//   description: string;
-//   dueDate : string
-// }
+// type TaskFormState = TaskProps;
 
-class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
-  render() {
+const TaskForm : React.FC<TaskFormProps> = (props) => {
+  const [nextID, incrementID] = useID("nextId", 0);
+  
     return (
       <form
         className="w-full flex flex-col justify-around gap-3 text-white"
@@ -25,24 +21,23 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
 
           const task = Object.fromEntries(
             formData.entries()
-          ) as unknown as Task;
+          ) as unknown as TaskItem;
 
-          task.dueDate = new Date(task.dueDate); //convert string to date type
-
-          this.props.addTask(task);
+          task.id = nextID;
+          
+          props.addTask(task);
+          
+          incrementID();
           form.reset();
         }}
       >
-        <label htmlFor="">Title</label>
+        <label htmlFor="title">Title</label>
         <input
           name="title"
           required
           id="todoTitle"
           className="grow p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500"
           type="text"
-          onChange={(event) => {
-            this.setState({ ...this.state, title: event.target.value });
-          }}
         />
         <label htmlFor="todoDescription">Description</label>
         <textarea
@@ -68,8 +63,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           Add&nbsp;item
         </button>
       </form>
-    );
-  }
+    )
 }
 
 export default TaskForm;

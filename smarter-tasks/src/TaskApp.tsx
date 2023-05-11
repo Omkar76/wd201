@@ -1,58 +1,43 @@
-import React from "react";
-// import DateUtil from "./DateUtil";
-import { Task } from "./Task";
+import React, { useEffect } from "react";
+import { TaskItem } from "./Task";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
-interface TaskAppProp {}
-interface TaskAppState {
-  tasks: Task[];
-}
+const TaskApp : React.FC =()=>  {
 
-class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
-  constructor(props: TaskAppProp) {
-    super(props);
-    this.state = {
-      tasks: [
-        // {
-        //   title: "Build the website with static content",
-        //   description: "Build a static website and deploy it on netlify",
-        //   dueDate: DateUtil.tommorrow,
-        //   assigneeName: "Kekeh",
-        // },
-        // {
-        //   title: "Add a blog",
-        //   description: "Share ideas with a blog",
-        //   dueDate: DateUtil.today,
-        //   assigneeName: "Kekeh",
-        // },
-      ],
-    };
-  }
-
-  addTask = (task: Task) => {
-    this.setState({
-      tasks: [...this.state.tasks, task],
-    });
+  const [tasks, setTasks] = useLocalStorage<TaskItem[]>("tasks", []); 
+  
+  // console.log(tasks)
+  const addTask = (task: TaskItem) => {
+    setTasks([...tasks, task]);
   };
-  render() {
-    return (
-      <>
-        <h1 className="text-violet-600 border-b border-b-violet-500 p-4 font-bold bg-black text-2xl md:text-3xl sticky top-0">
-          <img src="/favicon.svg" alt="YATL Logo" className="inline w-6 md:w-10" />{" "}
-          YetAnotherTodoList
-        </h1>
 
-        <div className="mt-5 m-auto max-w-lg p-4">
-          <div className=" bg-gray-900 p-4 rounded-md shadow-md shadow-black">
-          <TaskForm addTask={this.addTask} />
-          </div>
-          <hr className="mt-4 mb-4" />
-          <TaskList tasks={this.state.tasks} />
-        </div>
-      </>
-    );
+  const deleteTask = (taskID : number) =>{
+    const newTasks = tasks.filter(task => task.id !== taskID);
+    setTasks(newTasks);
   }
-}
+
+  useEffect(()=>{
+    console.log("You got "+ tasks.length + " tasks")
+  },[tasks.length])
+
+  return (
+    <>
+      <h1 className="text-violet-600 border-b border-b-violet-500 p-4 font-bold bg-black text-2xl md:text-3xl sticky top-0">
+        <img src="/favicon.svg" alt="YATL Logo" className="inline w-6 md:w-10" />{" "}
+        YetAnotherTodoList
+      </h1>
+
+      <div className="mt-5 m-auto max-w-lg p-4">
+        <div className=" bg-gray-900 p-4 rounded-md shadow-md shadow-black">
+        <TaskForm addTask={addTask} />
+        </div>
+        <hr className="mt-4 mb-4" />
+        <TaskList tasks={tasks}  deleteTask={deleteTask}/>
+      </div>
+    </>
+  );
+  }
 
 export default TaskApp;
