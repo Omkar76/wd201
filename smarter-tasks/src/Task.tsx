@@ -18,7 +18,7 @@ const TaskFC: React.FC<TaskProps> = (props) => {
       <div className="flex flex-row justify-between">
         <div>
           <Link to={`/tasks/${id}`}>
-            <h2 className="text-xl font-bold">{title}</h2>
+            <h2 className="text-base font-bold">{title}</h2>
           </Link>
           <p className="font-sans">{description}</p>
         </div>
