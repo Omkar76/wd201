@@ -1,4 +1,4 @@
-import { TaskItem } from "./Task";
+import { TaskItem } from "./types";
 import { useID } from "./hooks/useID";
 
 interface TaskFormProps {
@@ -58,7 +58,7 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
       <button
         id="addTaskButton"
         type="submit"
-        className="bg-black text-white p-2 border rounded-lg font-bold uppercase border-violet-500"
+        className="bg-black text-white p-2 border rounded-lg font-bold uppercase border-violet-500 w-full"
       >
         Add&nbsp;item
       </button>
