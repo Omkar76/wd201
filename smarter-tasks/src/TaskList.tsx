@@ -1,5 +1,6 @@
 import React from "react";
-import TaskCard, { TaskItem } from "./Task";
+import TaskCard from "./Task";
+import { TaskItem } from "./types";
 
 interface TaskListProps {
   tasks: TaskItem[];

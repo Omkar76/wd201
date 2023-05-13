@@ -1,14 +1,7 @@
 import React from "react";
 import { UserIcon, CalendarIcon, TrashIcon } from "@heroicons/react/24/solid";
-export interface TaskItem {
-  id: number;
-  title: string;
-  dueDate: string;
-  completedAtDate?: string;
-  assigneeName: string;
-  description?: string;
-}
-
+import { TaskItem } from "./types";
+import { Link } from "react-router-dom";
 export type TaskProps = {
   task: TaskItem;
   deleteTask: (taskID: number) => void;
@@ -24,10 +17,12 @@ const TaskFC: React.FC<TaskProps> = (props) => {
     <li className="list-none TaskItem bg-gray-800 text-white p-4 rounded mt-3 mb-3 shadow shadow-black border-violet-500">
       <div className="flex flex-row justify-between">
         <div>
-          <h2 className="text-xl font-bold">{title}</h2>
+          <Link to={`/tasks/${id}`}>
+            <h2 className="text-xl font-bold">{title}</h2>
+          </Link>
           <p className="font-sans">{description}</p>
         </div>
-
+    
         <button onClick={() => deleteTask(id)}>
           <TrashIcon className="h-6 w-6 text-violet-600 inline mr-2 deleteTaskButton" />
         </button>
