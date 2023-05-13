@@ -1,9 +1,9 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import HomePage from "./HomePage";
 import TaskApp from "./TaskApp";
 import TaskDetailsPage from "./TaskDetailsPage";
 import Header from "./Header";
-import Signin from "./SignIn";
+import Signin from "./Signin";
 import { ProtectedRoute } from "./ProtectedRoute";
 import NotFound from "./NotFound";
 
@@ -31,7 +31,7 @@ function App() {
         {/* No Layout for these pages */}
         <Route path="/signin" Component={Signin} />
         <Route path="/notfound" element={<NotFound/>} />
-        <Route path="*" element={<NotFound/>} />
+        <Route path="*"  element={ <Navigate to="/notfound" replace/> } />
       </Routes>
     </div>
   );
