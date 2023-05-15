@@ -1,6 +1,6 @@
-import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import React from "react";
+import { Navigate, useParams } from "react-router-dom";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import { TaskItem } from "./types";
 
 interface TaskDetailsPageParams extends Record<string, string> {
@@ -9,13 +9,12 @@ interface TaskDetailsPageParams extends Record<string, string> {
 
 const TaskDetailsPage: React.FC = () => {
   const { id } = useParams<TaskDetailsPageParams>();
-  const [tasks, ] = useLocalStorage<TaskItem[]>("tasks", []);
-  
-  const task = tasks.find(task => task.id.toString() === id);
+  const [tasks] = useLocalStorage<TaskItem[]>("tasks", []);
 
+  const task = tasks.find((task) => task.id.toString() === id);
 
-  if(!task){
-    return <Navigate to="/notfound"/>
+  if (!task) {
+    return <Navigate to="/notfound" />;
   }
 
   return (
@@ -24,7 +23,9 @@ const TaskDetailsPage: React.FC = () => {
         <h3 className="text-lg font-medium">{task.title}</h3>
       </div>
       <p className="text-gray-600">{task.description}</p>
-      <p className="text-gray-600">{new Date(task.dueDate).toLocaleDateString("en-IN")}</p>
+      <p className="text-gray-600">
+        {new Date(task.dueDate).toLocaleDateString("en-IN")}
+      </p>
     </div>
   );
 };

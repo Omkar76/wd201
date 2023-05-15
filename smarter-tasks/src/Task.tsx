@@ -22,7 +22,7 @@ const TaskFC: React.FC<TaskProps> = (props) => {
           </Link>
           <p className="font-sans">{description}</p>
         </div>
-    
+
         <button onClick={() => deleteTask(id)}>
           <TrashIcon className="h-6 w-6 text-violet-600 inline mr-2 deleteTaskButton" />
         </button>
