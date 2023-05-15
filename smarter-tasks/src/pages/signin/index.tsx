@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import SigninForm from "./SigninForm";
 import { AuthContext } from "../shared/AuthProvider";
-import { Link } from "react-router-dom";
 
 function Signin() {
   const authContext = useContext(AuthContext);

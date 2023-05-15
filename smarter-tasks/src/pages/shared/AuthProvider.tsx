@@ -1,5 +1,4 @@
-import { createContext, useEffect, useState } from "react";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { createContext, useState } from "react";
 
 export interface User {
   email: string;
