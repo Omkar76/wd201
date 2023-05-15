@@ -57,7 +57,7 @@ const SigninForm: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <Button className="mt-3">Sign In</Button>
+      <Button type="submit" className="mt-3">Sign In</Button>
     </form>
   );
 };

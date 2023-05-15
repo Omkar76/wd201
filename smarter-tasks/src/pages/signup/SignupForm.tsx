@@ -79,7 +79,7 @@ function SignupForm() {
         placeholder="********"
       />
 
-      <Button className="mt-3">Sign Up</Button>
+      <Button type="submit" className="mt-3">Sign Up</Button>
     </form>
   );
 }
