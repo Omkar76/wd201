@@ -38,7 +38,6 @@ function App() {
               path="/tasks/:id"
               element={<ProtectedRoute element={<TaskDetailsPage />} />}
             />
-            \
             <Route
               path="/dashboard"
               element={<ProtectedRoute element={<Dashboard />} />}
