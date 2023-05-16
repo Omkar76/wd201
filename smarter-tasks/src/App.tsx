@@ -1,5 +1,4 @@
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import { ProtectedRoute } from "./ProtectedRoute";
 
 import HomePage from "./HomePage";
 import Header from "./Header";
@@ -9,9 +8,15 @@ import Signin from "./pages/signin";
 import TaskApp from "./TaskApp";
 import TaskDetailsPage from "./TaskDetailsPage";
 import Dashboard from "./pages/dashboard";
-import AuthProvider from "./pages/shared/AuthProvider";
+import AuthProvider, { AuthContext } from "./pages/shared/AuthProvider";
+import { useContext } from "react";
 
-function Layout() {
+function ProtectedLayout() {
+  const authContext = useContext(AuthContext);
+  if (!authContext?.isAuthenticated) {
+    return <Navigate to="/signin" />;
+  }
+
   return (
     <div>
       <Header />
@@ -27,24 +32,15 @@ function App() {
     <div>
       <AuthProvider>
         <Routes>
-          {/* Layout with header is used for these pages */}
-          <Route element={<Layout />}>
-            <Route index element={<ProtectedRoute element={<HomePage />} />} />
-            <Route
-              path="/tasks"
-              element={<ProtectedRoute element={<TaskApp />} />}
-            />
-            <Route
-              path="/tasks/:id"
-              element={<ProtectedRoute element={<TaskDetailsPage />} />}
-            />
-            <Route
-              path="/dashboard"
-              element={<ProtectedRoute element={<Dashboard />} />}
-            />
+          {/* Protected routes with custom layout (includes <Header/>) */}
+          <Route element={<ProtectedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/tasks" element={<TaskApp />} />
+            <Route path="/tasks/:id" element={<TaskDetailsPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
 
-          {/* No Layout for these pages */}
+          {/* Unprotected routes */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/notfound" element={<NotFound />} />
