@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InputField from "../shared/InputField";
 import Button from "../shared/Button";
 import { API_ENDPOINT } from "../../config/constants";
@@ -10,6 +10,10 @@ const SigninForm: React.FC = () => {
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    authContext?.signout();
+  }, [authContext]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
