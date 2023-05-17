@@ -1,3 +1,1 @@
-# wd301-sma
-
-Yet Another Todo List
+# wd301 - Project Management System
