@@ -14,7 +14,7 @@ const Header = () => {
             <Link to="/tasks" className="ml-6 text-gray-300 hover:text-white">
               Tasks
             </Link>
-            <Link to="/signin" className="ml-6 text-gray-300 hover:text-white">
+            <Link to="/signin" id="logout-link" className="ml-6 text-gray-300 hover:text-white">
               Signout
             </Link>
           </div>
