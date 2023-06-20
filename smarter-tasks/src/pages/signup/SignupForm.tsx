@@ -11,7 +11,7 @@ function SignupForm() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const authContext = useContext(AuthContext);
-
+  console.log("API_ENDPOINT", API_ENDPOINT)
   const navigate = useNavigate();
 
   async function handleSignup(e: React.FormEvent<HTMLFormElement>) {
