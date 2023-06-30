@@ -1,54 +1,31 @@
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import {useContext, useEffect} from "react";
+import "./App.css";
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes"
+import {ThemeContext} from "./context/theme";
+import {ProjectsProvider} from "./context/projects/context";
+import {MembersProvider} from "./context/members/context";
 
-import HomePage from "./HomePage";
-import Header from "./Header";
-import NotFound from "./NotFound";
-import Signup from "./pages/signup";
-import Signin from "./pages/signin";
-import TaskApp from "./TaskApp";
-import TaskDetailsPage from "./TaskDetailsPage";
-import Dashboard from "./pages/dashboard";
-import AuthProvider, { AuthContext } from "./pages/shared/AuthProvider";
-import { useContext } from "react";
 
-function ProtectedLayout() {
-  const authContext = useContext(AuthContext);
-  if (!authContext?.isAuthenticated) {
-    return <Navigate to="/signin" />;
-  }
+const App = () => {
+  const currentTheme = useContext(ThemeContext)
+  useEffect(() => {
+    if(currentTheme.theme === 'dark'){
+      document.documentElement.classList.add('dark')
+    }else{
+      document.documentElement.classList.remove('dark')
+    }
+  }, [currentTheme.theme])
 
   return (
-    <div>
-      <Header />
-
-      {/* render child routes element */}
-      <Outlet />
+    <div className={`h-full w-full mx-auto py-2 ${currentTheme.theme === "dark" ? "dark" : ""}`}>
+      <MembersProvider>
+        <ProjectsProvider>
+          <RouterProvider router={router} />
+        </ProjectsProvider>
+      </MembersProvider>
     </div>
   );
 }
-
-function App() {
-  return (
-    <div>
-      <AuthProvider>
-        <Routes>
-          {/* Protected routes with custom layout (includes <Header/>) */}
-          <Route element={<ProtectedLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/tasks" element={<TaskApp />} />
-            <Route path="/tasks/:id" element={<TaskDetailsPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-
-          {/* Unprotected routes */}
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/notfound" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/notfound" replace />} />
-        </Routes>
-      </AuthProvider>
-    </div>
-  );
-}
-
 export default App;

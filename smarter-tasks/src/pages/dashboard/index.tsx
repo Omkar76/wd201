@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "../shared/AuthProvider";
+import { User } from "../../context/auth";
 
 const Dashboard: React.FC = () => {
   const userSerialized = localStorage.getItem("user")

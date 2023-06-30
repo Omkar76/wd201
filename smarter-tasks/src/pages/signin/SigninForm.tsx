@@ -1,28 +1,39 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputField from "../shared/InputField";
 import Button from "../shared/Button";
 import { API_ENDPOINT } from "../../config/constants";
-import { AuthContext, AuthResponse } from "../shared/AuthProvider";
+import { AuthContext, AuthResponse } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form";
 
+
+type FormData = {
+  email : string
+  password : string
+}
 const SigninForm: React.FC = () => {
-  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
 
   useEffect(()=>{
     authContext?.signout();
   }, [authContext]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {register, handleSubmit, formState : {errors}} = useForm<FormData>()
+
+  const onSubmit = async (formData: FormData) => {
 
     try {
       const response = await fetch(`${API_ENDPOINT}/users/sign_in`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email : formData.email,
+          password: formData.password }
+        ),
       });
 
       if (!response.ok) {
@@ -33,33 +44,41 @@ const SigninForm: React.FC = () => {
 
       const data: AuthResponse = await response.json();
       authContext?.signin(data);
-      navigate("/dashboard", { replace: true });
+      navigate("/account", { replace: true });
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputField
-        type="email"
-        name="email"
-        label="Email" // too many times bruh
-        id="email"
-        value={email}
-        placeholder="john@example.com"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="p-1 m-1">
+        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+          Email
+        </label>
 
-      <InputField
-        type="password"
-        name="password"
-        label="Password"
-        id="password"
-        value={password}
-        placeholder="********"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <input
+          {...register('email', {required : true})}
+          placeholder="john@example.com"
+          type="email"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+
+      </div>
+
+      <div className="p-1 m-1">
+        <label htmlFor="userPassword" className="block text-white font-semibold mb-2">
+          Password
+        </label>
+
+        <input
+          {...register('password', {required : true})}
+          id = "userPassword"
+          placeholder="********"
+          type="password"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+      </div>
 
       <Button type="submit" className="mt-3">Sign In</Button>
     </form>

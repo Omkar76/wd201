@@ -1,14 +1,17 @@
 import { useContext, useEffect } from "react";
 import SigninForm from "./SigninForm";
-import { AuthContext } from "../shared/AuthProvider";
+import { AuthContext } from "../../context/auth";
 
 function Signin() {
   const authContext = useContext(AuthContext);
-  useEffect(() => {
-    authContext?.signout();
-    console.log("Signing out");
-  });
+  // useEffect(() => {
+  //   authContext?.signout();
+  //   console.log("Signing out");
+  // });
 
+  const onSubmit = () =>{
+
+  }
   return (
     <div className="min-h-screen flex gap-8 items-center justify-center ">
       <div className="max-w-sm w-full bg-gray-900 p-6 rounded-md shadow-md shadow-black ">

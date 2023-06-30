@@ -1,17 +1,48 @@
-import React, { useContext, useState } from "react";
-import InputField from "../shared/InputField";
+import React, { useContext, useState, forwardRef } from "react";
 import Button from "../shared/Button";
 import { API_ENDPOINT } from "../../config/constants";
-import { AuthContext, AuthResponse } from "../shared/AuthProvider";
+import { AuthContext, AuthResponse } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
+import {SubmitHandler, useForm} from "react-hook-form";
 
+type FormData = {
+  organizationName : string
+  userName: string
+  userEmail : string
+  userPassword : string
+}
 function SignupForm() {
-  const [organisationName, setOrganisationName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const onSubmit :SubmitHandler<FormData> = async (formData : FormData) =>{
+
+    try {
+      const response = await fetch(`${API_ENDPOINT}/organisations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.organizationName,
+          user_name: formData.userName,
+          email: formData.userEmail,
+          password: formData.userPassword,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Sign-up failed");
+      }
+
+      console.log("Sign-up successful");
+
+      const authResponse: AuthResponse = await response.json();
+      authContext?.signin(authResponse);
+      navigate("/account", { replace: true });
+    } catch (error) {
+      console.error("Sign-up failed:", error);
+    }
+  }
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
+
   const authContext = useContext(AuthContext);
-  console.log("API_ENDPOINT", API_ENDPOINT)
+
   const navigate = useNavigate();
 
   async function handleSignup(e: React.FormEvent<HTMLFormElement>) {
@@ -21,10 +52,10 @@ function SignupForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: organisationName,
-          user_name: userName,
-          email: userEmail,
-          password: userPassword,
+          // name: organisationName,
+          // user_name: userName,
+          // email: userEmail,
+          // password: userPassword,
         }),
       });
 
@@ -36,49 +67,64 @@ function SignupForm() {
 
       const data: AuthResponse = await response.json();
       authContext?.signin(data);
-      navigate("/dashboard", { replace: true });
+      navigate("/account", { replace: true });
     } catch (error) {
       console.error("Sign-up failed:", error);
     }
   }
-
   return (
-    <form onSubmit={handleSignup}>
-      <InputField
-        label="Orgainization Name"
-        name="organisationName"
-        id="organisationName"
-        value={organisationName}
-        onChange={(e) => setOrganisationName(e.target.value)}
-        placeholder="Example Org"
-      />
-      <InputField
-        label="Username"
-        name="userName"
-        id="userName"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        placeholder="John"
-      />
-      <InputField
-        label="Email"
-        name="userEmail"
-        id="userEmail"
-        type="email"
-        value={userEmail}
-        onChange={(e) => setUserEmail(e.target.value)}
-        placeholder="john@example.com"
-      />
-      <InputField
-        label="Password"
-        name="userPassword"
-        id="userPassword"
-        type="password"
-        value={userPassword}
-        onChange={(e) => setUserPassword(e.target.value)}
-        placeholder="********"
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="p-1 m-1">
+        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+          Organization Name
+        </label>
 
+        <input
+          {...register('organizationName', {required : true})}
+          placeholder="Example Org"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+      </div>
+
+      <div className="p-1 m-1">
+        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+          Username
+        </label>
+
+        <input
+          {...register('userName', {required : true})}
+          placeholder="John"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+      </div>
+
+      <div className="p-1 m-1">
+        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+          Email
+        </label>
+
+        <input
+          {...register('userEmail', {required : true})}
+          placeholder="john@example.com"
+          type="email"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+
+      </div>
+
+      <div className="p-1 m-1">
+        <label htmlFor="userPassword" className="block text-white font-semibold mb-2">
+          Password
+        </label>
+
+        <input
+          {...register('userPassword', {required : true})}
+          id = "userPassword"
+          placeholder="********"
+          type="password"
+          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+        />
+      </div>
       <Button type="submit" className="mt-3">Sign Up</Button>
     </form>
   );
