@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
 
 type FormData = {
-  organizationName : string
+  organisationName : string
   userName: string
   userEmail : string
   userPassword : string
@@ -19,7 +19,7 @@ function SignupForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.organizationName,
+          name: formData.organisationName,
           user_name: formData.userName,
           email: formData.userEmail,
           password: formData.userPassword,
@@ -80,33 +80,36 @@ function SignupForm() {
         </label>
 
         <input
-          {...register('organizationName', {required : true})}
+          {...register('organisationName', {required : true})}
+          id="organisationName"
           placeholder="Example Org"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
         />
       </div>
 
       <div className="p-1 m-1">
-        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+        <label htmlFor="userName" className="block text-white font-semibold mb-2">
           Username
         </label>
 
         <input
           {...register('userName', {required : true})}
+          id="userName"
           placeholder="John"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
         />
       </div>
 
       <div className="p-1 m-1">
-        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+        <label htmlFor="userEmail" className="block text-white font-semibold mb-2">
           Email
         </label>
 
         <input
+          id="userEmail"
           {...register('userEmail', {required : true})}
           placeholder="john@example.com"
-          type="email"
+          type="userEmail"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
         />
 

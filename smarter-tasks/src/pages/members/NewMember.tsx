@@ -41,6 +41,7 @@ const NewMember = () => {
   return (
     <>
       <button onClick={openModal}
+              id="new-member-btn"
               type="button"
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
@@ -86,18 +87,20 @@ const NewMember = () => {
 
                         <input
                           {...register('name', {required : true})}
+                          id="name"
                           placeholder="John"
                           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
                         />
                       </div>
 
                       <div className="p-1 m-1">
-                        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+                        <label htmlFor="email" className="block text-white font-semibold mb-2">
                           Email
                         </label>
 
                         <input
                           {...register('email', {required : true})}
+                          id="email"
                           placeholder="john@example.com"
                           type="email"
                           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
@@ -106,20 +109,20 @@ const NewMember = () => {
                       </div>
 
                       <div className="p-1 m-1">
-                        <label htmlFor="userPassword" className="block text-white font-semibold mb-2">
+                        <label htmlFor="password" className="block text-white font-semibold mb-2">
                           Password
                         </label>
 
                         <input
                           {...register('password', {required : true})}
-                          id = "userPassword"
+                          id = "password"
                           placeholder="********"
                           type="password"
                           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
                         />
                       </div>
                       {errors.name && <span>This field is required</span>}
-                      <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                      <button type="submit" id="create-member-btn" className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                         Submit
                       </button>
                       <button type="submit" onClick={closeModal} className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">

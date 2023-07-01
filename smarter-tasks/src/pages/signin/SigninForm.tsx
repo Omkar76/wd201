@@ -53,12 +53,13 @@ const SigninForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-1 m-1">
-        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+        <label htmlFor="userEmail" className="block text-white font-semibold mb-2">
           Email
         </label>
 
         <input
           {...register('email', {required : true})}
+          id = "email"
           placeholder="john@example.com"
           type="email"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
@@ -73,7 +74,7 @@ const SigninForm: React.FC = () => {
 
         <input
           {...register('password', {required : true})}
-          id = "userPassword"
+          id = "password"
           placeholder="********"
           type="password"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
