@@ -48,7 +48,7 @@ export const reducer = (state: MembersState = initialState, action: MembersActio
     case 'ADD_MEMBER_SUCCESS':
        return { ...state, members: [...state.members, action.payload] };
     case 'DELETE_MEMBER_SUCCESS':
-        return {...state, members: state.members.filter(member=> member.id == action.payload)}
+        return {...state, members: state.members.filter(member=> member.id != action.payload)}
     default:
       return state;
   }
