@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import {createBrowserRouter, Navigate, Outlet} from "react-router-dom";
 
 import AccountLayout from "../layouts/account"
 import ProtectedRoute from "./ProtectedRoute"
@@ -7,6 +7,9 @@ import Signup from "../pages/signup"
 import Projects from "../pages/projects"
 import Members from "../pages/members"
 import Logout from "../pages/logout";
+import ProjectContainer from "../pages/projects/ProjectContainer";
+import ProjectDetails from "../pages/project_details/ProjectDetails";
+import NewTask from "../pages/tasks/NewTask";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +30,7 @@ const router = createBrowserRouter([
     },
     // Protected Routes
     {
-        path: "/account",
+        path: "/account/",
         element: (
             <ProtectedRoute>
                 <AccountLayout />
@@ -36,15 +39,37 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Navigate to={"/account/projects"} replace/>
+                element: <Navigate to={"projects"} replace/>
             },
             {
-                path: "/account/projects",
-                element: (<Projects />)
+                path: "projects",
+                element: (<ProjectContainer />),
+                children: [
+                    { index: true, element: <Projects /> },
+                    {
+                      path: ":projectID",
+                      element: <ProjectDetails/>,
+                      children: [
+                        { index: true, element: <></> },
+                        {
+                          path: "tasks",
+                          children: [
+                            { index: true, element: <Navigate to="../" replace /> },
+                            { path: "new", element: <NewTask/> },
+                            {
+                              path: ":taskID",
+                              children: [{ index: true, element: <>Show Task Details</> }],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
             },
             {
-                path: "/account/members",
-                element: (<Members />)
+                path: "members",
+                element: (<Members />),
+                
             },
         ],
     },

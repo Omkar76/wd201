@@ -7,11 +7,11 @@ import ProjectListItems from "./ProjectListItems";
 
 
 const ProjectList: React.FC = () => {
-  const dispatchProjects = useProjectsDispatch()
+  // const dispatchProjects = useProjectsDispatch()
   const state = useProjectsState();
-  useEffect(() => {
-    fetchProjects(dispatchProjects);
-  }, [fetchProjects, dispatchProjects]);
+  // useEffect(() => {
+  //   fetchProjects(dispatchProjects);
+  // }, [fetchProjects, dispatchProjects]);
 
   if(!state){
     return <>something went wrong</>;
