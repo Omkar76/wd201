@@ -28,6 +28,16 @@ const router = createBrowserRouter([
         path : "/logout",
         element: <Logout/>
     },
+    {
+        path: "projects",
+        children: [
+            { index: true, element: <Projects /> },
+            {
+                path: ":projectID",
+                element: <>Show project details <Outlet /></>,
+            }
+        ]
+    },
     // Protected Routes
     {
         path: "/account/",

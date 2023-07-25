@@ -1,7 +1,7 @@
 import {Fragment, useContext, useState} from 'react'
 import { Disclosure, Menu, Switch, Transition } from '@headlessui/react'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
-import Logo from "../../assets/images/logo.png"
+import Logo from "../../assets/images/logo1.png"
 import { Link, useLocation } from "react-router-dom"
 import {ThemeContext} from "../../context/theme";
 
@@ -47,6 +47,7 @@ const Appbar = () => {
                     alt="Smarter Tasks"
                   />
                 </div>
+                <h1 className="text-xl font-bold">Smarter Tasks</h1>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => { 
