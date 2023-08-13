@@ -10,6 +10,8 @@ import Logout from "../pages/logout";
 import ProjectContainer from "../pages/projects/ProjectContainer";
 import ProjectDetails from "../pages/project_details/ProjectDetails";
 import NewTask from "../pages/tasks/NewTask";
+import { ProjectDetailsIndex } from "../pages/project_details";
+import TaskDetailsContainer from "../pages/project_details/TaskDetailsContainer";
 
 const router = createBrowserRouter([
     {
@@ -58,7 +60,7 @@ const router = createBrowserRouter([
                     { index: true, element: <Projects /> },
                     {
                       path: ":projectID",
-                      element: <ProjectDetails/>,
+                      element: <ProjectDetailsIndex/>,
                       children: [
                         { index: true, element: <></> },
                         {
@@ -68,7 +70,7 @@ const router = createBrowserRouter([
                             { path: "new", element: <NewTask/> },
                             {
                               path: ":taskID",
-                              children: [{ index: true, element: <>Show Task Details</> }],
+                              children: [{ index: true, element: <TaskDetailsContainer/> }],
                             },
                           ],
                         },

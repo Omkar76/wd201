@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { taskReducer, initialState } from "./reducer";
 import { TaskListState, TasksDispatch } from "./types";
 const TasksStateContext = createContext<TaskListState>(initialState);
-const TasksDispatchContext = createContext<TasksDispatch>(() => {});
+const TasksDispatchContext = createContext<TasksDispatch>(()=>{throw "No provider"});
 export const TasksProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {

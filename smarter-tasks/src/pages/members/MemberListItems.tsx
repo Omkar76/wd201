@@ -6,7 +6,6 @@ export default function MemberListItems() {
   let state: any = useMembersState();
   const dispatchMembers = useMembersDispatch();
   const { members, isLoading, isError, errorMessage } = state
-  console.log(state)
 
   if (members.length === 0 && isLoading) {
     return <span>Loading...</span>;

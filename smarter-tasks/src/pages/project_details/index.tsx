@@ -2,11 +2,13 @@ import { Outlet } from "react-router-dom";
 import { TasksProvider } from "../../context/task/context";
 import ProjectDetails from "./ProjectDetails";
 
-const ProjectDetailsIndex: React.FC = () => {
+export const ProjectDetailsIndex: React.FC = () => {
     return (
+      <>
       <TasksProvider>
         <ProjectDetails />
-        <Outlet />
+        {/* <Outlet /> */}
       </TasksProvider>
+      </>
     );
   };

@@ -32,22 +32,42 @@ export interface TaskListState {
     projectData : ProjectData
 }
 
-// Actions that are available
 export enum TaskListAvailableAction {
+    FETCH_TASKS_REQUEST = "FETCH_TASKS_REQUEST",
+    FETCH_TASKS_SUCCESS = "FETCH_TASKS_SUCCESS",
+    FETCH_TASKS_FAILURE = "FETCH_TASKS_FAILURE",
+  
+    DELETE_TASKS_REQUEST = "DELETE_TASKS_REQUEST",
+    DELETE_TASKS_SUCCESS = "DELETE_TASKS_SUCCESS",
+    DELETE_TASKS_FAILURE = "DELETE_TASKS_FAILURE",
+  
     CREATE_TASK_REQUEST = "CREATE_TASK_REQUEST",
     CREATE_TASK_SUCCESS = "CREATE_TASK_SUCCESS",
     CREATE_TASK_FAILURE = "CREATE_TASK_FAILURE",
+  
+    // Add action types
+    UPDATE_TASK_REQUEST = "UPDATE_TASK_REQUEST",
+    UPDATE_TASK_SUCCESS = "UPDATE_TASK_SUCCESS",
+    UPDATE_TASK_FAILURE = "UPDATE_TASK_FAILURE",
+  
     REORDER_TASKS = "REORDER_TASKS",
-}
-
-// Create a type to hold list of actions that can be dispatched
-export type TaskActions =
+  }
+  
+  export type TaskActions =
+    | { type: TaskListAvailableAction.REORDER_TASKS; payload: ProjectData }
+    | { type: TaskListAvailableAction.FETCH_TASKS_REQUEST }
+    | { type: TaskListAvailableAction.FETCH_TASKS_SUCCESS; payload: ProjectData }
+    | { type: TaskListAvailableAction.FETCH_TASKS_FAILURE; payload: string }
+    | { type: TaskListAvailableAction.DELETE_TASKS_REQUEST }
+    | { type: TaskListAvailableAction.DELETE_TASKS_SUCCESS }
+    | { type: TaskListAvailableAction.DELETE_TASKS_FAILURE; payload: string }
     | { type: TaskListAvailableAction.CREATE_TASK_REQUEST }
     | { type: TaskListAvailableAction.CREATE_TASK_SUCCESS }
     | { type: TaskListAvailableAction.CREATE_TASK_FAILURE; payload: string }
-    | { type: TaskListAvailableAction.REORDER_TASKS, payload: ProjectData }
+    | { type: TaskListAvailableAction.UPDATE_TASK_REQUEST }
+    | { type: TaskListAvailableAction.UPDATE_TASK_SUCCESS }
+    | { type: TaskListAvailableAction.UPDATE_TASK_FAILURE; payload: string };
 
-// A type to hold dispatch actions in a context.
 export type TasksDispatch = React.Dispatch<TaskActions>;
 
 export type Tasks = {

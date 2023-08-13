@@ -5,7 +5,6 @@ export default function ProjectListItems() {
   let state: any = useProjectsState();
 
   const { projects, isLoading, isError, errorMessage } = state
-  console.log(projects);
 
   if (projects.length === 0 && isLoading) {
     return <span>Loading...</span>;
@@ -15,7 +14,6 @@ export default function ProjectListItems() {
     return <span>{errorMessage}</span>;
   }
 
-  console.log(projects)
   return (
     <>
       {projects.map((project: any) => (

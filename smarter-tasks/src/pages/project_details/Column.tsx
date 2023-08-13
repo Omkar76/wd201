@@ -1,10 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import { ColumnData, TaskDetails } from "../../context/task/types";
 import Task from "./Task";
-
+import { Draggable, Droppable } from "react-beautiful-dnd";
 const Container = (props: React.PropsWithChildren) => {
-  // We will use flex to display lists as columns
   return (
     <div className="m-2 border border-gray rounded w-1/3 flex flex-col">
       {props.children}
@@ -12,32 +11,43 @@ const Container = (props: React.PropsWithChildren) => {
   );
 };
 
-// A component to render the title, which will be included as <Title>This is a sample title</Title>
 const Title = (props: React.PropsWithChildren) => {
   return <h3 className="p-2 font-semibold">{props.children}</h3>;
 };
 
-const TaskList = (props: React.PropsWithChildren) => {
-  return <div className="grow min-h-100"> {props.children}</div>;
-};
 
 interface Props {
   column: ColumnData;
   tasks: TaskDetails[];
 }
 
+const TaskList = forwardRef<HTMLDivElement | null, React.PropsWithChildren>(
+  (props: React.PropsWithChildren, ref) => {
+    return (
+      <div ref={ref} className="grow min-h-100 dropArea" {...props}>
+        {" "}
+        {props.children}
+      </div>
+    );
+  }
+);
 const Column: React.FC<Props> = (props) => {
-  // Render each `Task` within a `TaskList` component.
   return (
     <Container>
       <Title>{props.column.title}</Title>
-      <TaskList>
-        {props.tasks.map((task) => (
-          <Task key={task.id} task={task}  />
-        ))}
-      </TaskList>
+      <Droppable droppableId={props.column.id}>
+        {(provided) => (
+          <TaskList ref={provided.innerRef} {...provided.droppableProps}>
+            {props.tasks.map((task, idx) => (
+              <Task key={task.id} task={task} index={idx} />
+            ))}
+            {provided.placeholder}
+          </TaskList>
+        )}
+      </Droppable>
     </Container>
   );
 };
+
 
 export default Column;

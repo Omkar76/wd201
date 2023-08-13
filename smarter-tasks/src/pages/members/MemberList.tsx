@@ -1,5 +1,4 @@
-import React, {useEffect, useReducer} from 'react';
-import { API_ENDPOINT } from '../../config/constants';
+import React, {useEffect} from 'react';
 import {useMembersDispatch, useMembersState} from "../../context/members/context";
 import {fetchMembers} from "../../context/members/actions";
 import MemberListItems from "./MemberListItems";
@@ -11,7 +10,7 @@ const MemberList: React.FC = () => {
   const state = useMembersState();
   useEffect(() => {
     fetchMembers(dispatchMembers);
-  }, [fetchMembers, dispatchMembers]);
+  }, [dispatchMembers]);
 
   if(!state){
     return <>something went wrong</>;

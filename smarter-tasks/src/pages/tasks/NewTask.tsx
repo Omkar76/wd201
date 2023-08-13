@@ -36,7 +36,7 @@ const NewTask = () => {
   const onSubmit: SubmitHandler<TaskDetailsPayload> = async (data) => {
     try {
       // Invoke the actual API and create a task.
-      addTask(taskDispatch, projectID ?? "", data);
+      await addTask(taskDispatch, projectID ?? "", data);
       closeModal();
     } catch (error) {
       console.error("Operation failed:", error);

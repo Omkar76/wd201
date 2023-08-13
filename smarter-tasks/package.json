@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@vitejs/plugin-react": "^4.0.1",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",

@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 
-import { useTasksState } from "../../context/task/context";
+import { useTasksState, useTasksDispatch } from "../../context/task/context";
 import DragDropList from "./DragDropList";
 import { useProjectsState } from "../../context/projects/context";
-
+import { refreshTasks } from "../../context/projects/actions";
 const ProjectDetails = () => {
   // Extract task and project from context
   const tasksState = useTasksState();
   const projectState = useProjectsState();
+  const taskDispatch = useTasksDispatch();
   let { projectID } = useParams();
 
-  // Get the selected project based on `projectID`
+  useEffect(() => {
+    console.log("projetID",projectID)
+    if (projectID) refreshTasks(taskDispatch, projectID);
+  }, [projectID, taskDispatch]);
+
   const selectedProject = projectState?.projects.filter(
     (project) => `${project.id}` === projectID
   )?.[0];
 
-  // Display error if there is no project with given id.
   if (!selectedProject) {
     return <>No such Project!</>;
   }

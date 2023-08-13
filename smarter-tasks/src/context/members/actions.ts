@@ -1,7 +1,6 @@
 import { API_ENDPOINT } from '../../config/constants';
 import {MembersDispatch} from "./context";
 
-console.log("API", API_ENDPOINT)
 export let fetchMembers = async (dispatch: MembersDispatch) => {
   const token = localStorage.getItem("authToken") ?? "";
   try {
