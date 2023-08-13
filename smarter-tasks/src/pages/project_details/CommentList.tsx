@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import {
   useCommentsDispatch,
   useCommentsState,
-} from "../../context/comments/context";
-import { fetchComments } from "../../context/comments/actions";
+} from "../../context/comment/context";
+import { fetchComments } from "../../context/comment/actions";
 import CommentListItems from "./CommentListItems";
 
 interface CommentListProps {

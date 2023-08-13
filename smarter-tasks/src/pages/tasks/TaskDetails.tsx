@@ -1,6 +1,6 @@
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
-import React, { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTasksDispatch, useTasksState } from "../../context/task/context";
@@ -9,14 +9,8 @@ import { updateTask } from "../../context/task/actions";
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
 import { useMembersState } from "../../context/members/context";
-import CommentList from "./CommentList";
-import {
-  CommentsProvider,
-  useCommentsDispatch,
-  useCommentsState,
-} from "../../context/comments/context";
-import { addComment } from "../../context/comments/actions";
-import { CommentSection } from "./CommentSection";
+import { CommentsProvider } from "../../context/comment/context";
+import { CommentSection } from "../project_details/CommentSection";
 
 type TaskFormUpdatePayload = TaskDetailsPayload & {
   selectedPerson: string;

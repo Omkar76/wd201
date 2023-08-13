@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { addComment } from "../../context/comments/actions";
-import { useCommentsDispatch } from "../../context/comments/context";
+import { addComment } from "../../context/comment/actions";
+import { useCommentsDispatch } from "../../context/comment/context";
 import CommentList from "./CommentList";
 import { useParams } from "react-router-dom";
 

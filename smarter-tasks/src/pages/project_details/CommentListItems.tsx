@@ -1,8 +1,8 @@
 import {
   useCommentsDispatch,
   useCommentsState,
-} from "../../context/comments/context";
-import { CommentsState } from "../../context/comments/reducer";
+} from "../../context/comment/context";
+import { CommentsState } from "../../context/comment/reducer";
 import { useMembersState } from "../../context/members/context";
 export default function CommentListItems() {
   const state: CommentsState = useCommentsState();
