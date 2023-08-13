@@ -21,6 +21,7 @@ export let fetchComments = async (
       }
     );
     const data = await response.json();
+    data.comments = data.comments.sort((a, b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     dispatch({ type: "FETCH_COMMENTS_SUCCESS", payload: data });
   } catch (error) {
     console.log("Error fetching projects:", error);
