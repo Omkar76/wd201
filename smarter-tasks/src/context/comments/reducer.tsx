@@ -1,7 +1,6 @@
 interface Comment {
   id: number;
-  owner : number
-
+  owner: number;
 }
 
 export interface CommentsState {
@@ -12,25 +11,28 @@ export interface CommentsState {
 }
 
 export type CommentsActions =
-  | { type: 'FETCH_COMMENTS_REQUEST' }
-  | { type: 'FETCH_COMMENTS_SUCCESS'; payload: Comment[] }
-  | { type: 'FETCH_COMMENTS_FAILURE'; payload: string }
-  | { type : 'ADD_COMMENT_SUCCESS'; }
-  | { type : 'DELETE_COMMENT_SUCCESS', payload : number }
+  | { type: "FETCH_COMMENTS_REQUEST" }
+  | { type: "FETCH_COMMENTS_SUCCESS"; payload: Comment[] }
+  | { type: "FETCH_COMMENTS_FAILURE"; payload: string }
+  | { type: "ADD_COMMENT_SUCCESS" }
+  | { type: "DELETE_COMMENT_SUCCESS"; payload: number };
 
 export const initialState: CommentsState = {
   comments: [],
   isLoading: false,
   isError: false,
-  errorMessage: ''
+  errorMessage: "",
 };
 
-export const reducer = (state: CommentsState = initialState, action: CommentsActions): CommentsState => {
+export const reducer = (
+  state: CommentsState = initialState,
+  action: CommentsActions
+): CommentsState => {
   switch (action.type) {
     case "FETCH_COMMENTS_REQUEST":
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case "FETCH_COMMENTS_SUCCESS":
       return {
@@ -43,14 +45,19 @@ export const reducer = (state: CommentsState = initialState, action: CommentsAct
         ...state,
         isLoading: false,
         isError: true,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
 
-    case 'ADD_COMMENT_SUCCESS':
-      return { ...state, isLoading : false};
-    case 'DELETE_COMMENT_SUCCESS':
-      return {...state, comments: state.comments.filter(comment=> comment.id !== action.payload)}
+    case "ADD_COMMENT_SUCCESS":
+      return { ...state, isLoading: false };
+    case "DELETE_COMMENT_SUCCESS":
+      return {
+        ...state,
+        comments: state.comments.filter(
+          (comment) => comment.id !== action.payload
+        ),
+      };
     default:
       return state;
   }
-}
+};

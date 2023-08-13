@@ -10,7 +10,11 @@ import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
 import { useMembersState } from "../../context/members/context";
 import CommentList from "./CommentList";
-import { CommentsProvider, useCommentsDispatch, useCommentsState } from "../../context/comments/context";
+import {
+  CommentsProvider,
+  useCommentsDispatch,
+  useCommentsState,
+} from "../../context/comments/context";
 import { addComment } from "../../context/comments/actions";
 import { CommentSection } from "./CommentSection";
 
@@ -74,7 +78,7 @@ const TaskDetails = () => {
     const assignee = memberState?.members?.filter(
       (member) => member.name === selectedPerson
     )?.[0];
-    
+
     updateTask(taskDispatch, projectID ?? "", {
       ...selectedTask,
       ...data,
@@ -86,7 +90,11 @@ const TaskDetails = () => {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10 overflow-y-auto" onClose={closeModal}>
+        <Dialog
+          as="div"
+          className="relative z-10 overflow-y-auto"
+          onClose={closeModal}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -119,7 +127,9 @@ const TaskDetails = () => {
                   </Dialog.Title>
                   <div className="mt-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <label htmlFor="title" className="font-bolder">Title</label>
+                      <label htmlFor="title" className="font-bolder">
+                        Title
+                      </label>
                       <input
                         type="text"
                         required
@@ -128,7 +138,9 @@ const TaskDetails = () => {
                         {...register("title", { required: true })}
                         className="w-full border rounded-md py-2 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                       />
-                      <label htmlFor="title" className="font-bolder">Description</label>
+                      <label htmlFor="title" className="font-bolder">
+                        Description
+                      </label>
                       <input
                         type="text"
                         required
@@ -137,7 +149,9 @@ const TaskDetails = () => {
                         {...register("description", { required: true })}
                         className="w-full border rounded-md py-2 px-3 my-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                       />
-                      <label htmlFor="title" className="font-bolder">Due Date</label>
+                      <label htmlFor="title" className="font-bolder">
+                        Due Date
+                      </label>
                       <input
                         type="date"
                         required
@@ -148,21 +162,21 @@ const TaskDetails = () => {
                       />
                       <h3>Assignee</h3>
                       <Listbox
-
                         value={selectedPerson}
                         onChange={setSelectedPerson}
                       >
                         <Listbox.Button className="w-full border rounded-md py-2 px-3 my-2 text-gray-700 text-base text-left">
-                          {selectedPerson || "Select a person"} 
+                          {selectedPerson || "Select a person"}
                         </Listbox.Button>
                         <Listbox.Options className="absolute mt-1 max-h-60 rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           {memberState?.members.map((person) => (
                             <Listbox.Option
                               key={person.id}
                               className={({ active }) =>
-                                `relative cursor-default select-none py-2 px-8 min-w-{100px} ${active
-                                  ? "bg-blue-100 text-blue-900"
-                                  : "text-gray-900"
+                                `relative cursor-default select-none py-2 px-8 min-w-{100px} ${
+                                  active
+                                    ? "bg-blue-100 text-blue-900"
+                                    : "text-gray-900"
                                 }`
                               }
                               value={person.name}
@@ -170,8 +184,9 @@ const TaskDetails = () => {
                               {({ selected }) => (
                                 <>
                                   <span
-                                    className={`block truncate ${selected ? "font-medium" : "font-normal"
-                                      }`}
+                                    className={`block truncate ${
+                                      selected ? "font-medium" : "font-normal"
+                                    }`}
                                   >
                                     {person.name}
                                   </span>
@@ -204,11 +219,11 @@ const TaskDetails = () => {
                       </button>
                     </form>
 
-                    <div className="bg-gray-100 my-4 h-0.5"/>
+                    <div className="bg-gray-100 my-4 h-0.5" />
 
                     <h3 className="font-bolder text-lg mb-2">Comments</h3>
                     <CommentsProvider>
-                      <CommentSection/> 
+                      <CommentSection />
                     </CommentsProvider>
                   </div>
                 </Dialog.Panel>
@@ -220,7 +235,5 @@ const TaskDetails = () => {
     </>
   );
 };
-
-
 
 export default TaskDetails;

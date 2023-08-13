@@ -12,7 +12,7 @@ const TaskDetailsContainer = () => {
   const selectedTask = taskListState.projectData.tasks?.[taskID || ""];
 
   if (isFetchingTasks || !projectState || projectState?.isLoading) {
- return <>Loading...</>;
+    return <>Loading...</>;
   }
   if (!selectedTask) {
     return <>No such task!</>;

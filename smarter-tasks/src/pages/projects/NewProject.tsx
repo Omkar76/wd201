@@ -1,43 +1,45 @@
-import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
-import {SubmitHandler, useForm} from "react-hook-form";
-import {addProject} from "../../context/projects/actions";
-import {useProjectsDispatch} from "../../context/projects/context";
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { addProject } from "../../context/projects/actions";
+import { useProjectsDispatch } from "../../context/projects/context";
 const NewProject = () => {
-
-
-  let [isOpen, setIsOpen] = useState(false)
-  const [error, setError] = useState(null)
+  let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   const dispatchProjects = useProjectsDispatch();
   const openModal = () => {
-    setIsOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-  }
-
-  type Inputs = {
-    name: string
+    setIsOpen(true);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  type Inputs = {
+    name: string;
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { name } = data
-    const response = await addProject(dispatchProjects, { name })
+    const { name } = data;
+    const response = await addProject(dispatchProjects, { name });
     if (response.ok) {
-      setIsOpen(false)
+      setIsOpen(false);
     } else {
-      setError(response.error as React.SetStateAction<null>)
+      setError(response.error as React.SetStateAction<null>);
     }
   };
 
   return (
     <>
-      <button onClick={openModal}
+      <button
+        onClick={openModal}
         type="button"
         id="new-member-btn"
         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
@@ -79,19 +81,27 @@ const NewProject = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <input
                         type="text"
-                        placeholder='Enter project name...'
+                        placeholder="Enter project name..."
                         autoFocus
-                        {...register('name', { required: true })}
+                        {...register("name", { required: true })}
                         className={`w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
-                          errors.name ? 'border-red-500' : ''
+                          errors.name ? "border-red-500" : ""
                         }`}
                       />
                       {errors.name && <span>This field is required</span>}
-                      <button type="submit" id="create-member-btn" className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                      <button
+                        type="submit"
+                        id="create-member-btn"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      >
                         Submit
                       </button>
-                      <button type="submit" onClick={closeModal} className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                       Cancel
+                      <button
+                        type="submit"
+                        onClick={closeModal}
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      >
+                        Cancel
                       </button>
                     </form>
                   </div>
@@ -102,6 +112,6 @@ const NewProject = () => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 export default NewProject;

@@ -9,9 +9,7 @@ function Signin() {
   //   console.log("Signing out");
   // });
 
-  const onSubmit = () =>{
-
-  }
+  const onSubmit = () => {};
   return (
     <div className="min-h-screen flex gap-8 items-center justify-center ">
       <div className="max-w-sm w-full bg-gray-900 p-6 rounded-md shadow-md shadow-black ">

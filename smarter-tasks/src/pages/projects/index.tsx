@@ -3,16 +3,16 @@ import React from "react";
 import NewProject from "./NewProject";
 import ProjectListItems from "./ProjectListItems";
 const Projects = () => {
-    return (
+  return (
+    <>
       <>
-        <>
-          <div className="flex justify-between">
-            <h2 className="text-2xl font-medium tracking-tight">Projects</h2>
-            <NewProject />
-          </div>
-          <ProjectList />
-        </>
+        <div className="flex justify-between">
+          <h2 className="text-2xl font-medium tracking-tight">Projects</h2>
+          <NewProject />
+        </div>
+        <ProjectList />
       </>
-    )
-}
+    </>
+  );
+};
 export default Projects;

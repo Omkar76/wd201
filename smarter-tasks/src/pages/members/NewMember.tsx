@@ -1,49 +1,50 @@
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition } from "@headlessui/react";
 
-import React, { Fragment, useState } from 'react'
-import {SubmitHandler, useForm} from "react-hook-form";
-import {addMember} from "../../context/members/actions";
-import {useMembersDispatch} from "../../context/members/context";
+import React, { Fragment, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { addMember } from "../../context/members/actions";
+import { useMembersDispatch } from "../../context/members/context";
 const NewMember = () => {
-
-
-  let [isOpen, setIsOpen] = useState(false)
-  const [error, setError] = useState(null)
+  let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   const dispatchMembers = useMembersDispatch();
   const openModal = () => {
-    setIsOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-  }
-
-  type Inputs = {
-    name: string
-    email : string
-    password : string
+    setIsOpen(true);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  type Inputs = {
+    name: string;
+    email: string;
+    password: string;
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-
-    const response = await addMember(dispatchMembers, data)
+    const response = await addMember(dispatchMembers, data);
     if (response.ok) {
-      setIsOpen(false)
+      setIsOpen(false);
     } else {
-      setError(response.error as React.SetStateAction<null>)
+      setError(response.error as React.SetStateAction<null>);
     }
   };
 
   return (
     <>
-      <button onClick={openModal}
-              id="new-member-btn"
-              type="button"
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      <button
+        onClick={openModal}
+        id="new-member-btn"
+        type="button"
+        className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         New Member
       </button>
@@ -79,57 +80,72 @@ const NewMember = () => {
                     Create new member
                   </Dialog.Title>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="p-1 m-1">
-                        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
-                          Username
-                        </label>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="p-1 m-1">
+                      <label
+                        htmlFor="organisationName"
+                        className="block text-white font-semibold mb-2"
+                      >
+                        Username
+                      </label>
 
-                        <input
-                          {...register('name', {required : true})}
-                          id="name"
-                          placeholder="John"
-                          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
-                        />
-                      </div>
+                      <input
+                        {...register("name", { required: true })}
+                        id="name"
+                        placeholder="John"
+                        className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+                      />
+                    </div>
 
-                      <div className="p-1 m-1">
-                        <label htmlFor="email" className="block text-white font-semibold mb-2">
-                          Email
-                        </label>
+                    <div className="p-1 m-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-white font-semibold mb-2"
+                      >
+                        Email
+                      </label>
 
-                        <input
-                          {...register('email', {required : true})}
-                          id="email"
-                          placeholder="john@example.com"
-                          type="email"
-                          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
-                        />
+                      <input
+                        {...register("email", { required: true })}
+                        id="email"
+                        placeholder="john@example.com"
+                        type="email"
+                        className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+                      />
+                    </div>
 
-                      </div>
+                    <div className="p-1 m-1">
+                      <label
+                        htmlFor="password"
+                        className="block text-white font-semibold mb-2"
+                      >
+                        Password
+                      </label>
 
-                      <div className="p-1 m-1">
-                        <label htmlFor="password" className="block text-white font-semibold mb-2">
-                          Password
-                        </label>
-
-                        <input
-                          {...register('password', {required : true})}
-                          id = "password"
-                          placeholder="********"
-                          type="password"
-                          className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
-                        />
-                      </div>
-                      {errors.name && <span>This field is required</span>}
-                      <button type="submit" id="create-member-btn" className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                        Submit
-                      </button>
-                      <button type="submit" onClick={closeModal} className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                        Cancel
-                      </button>
-                    </form>
-
+                      <input
+                        {...register("password", { required: true })}
+                        id="password"
+                        placeholder="********"
+                        type="password"
+                        className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
+                      />
+                    </div>
+                    {errors.name && <span>This field is required</span>}
+                    <button
+                      type="submit"
+                      id="create-member-btn"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      type="submit"
+                      onClick={closeModal}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    >
+                      Cancel
+                    </button>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -137,6 +153,6 @@ const NewMember = () => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 export default NewMember;

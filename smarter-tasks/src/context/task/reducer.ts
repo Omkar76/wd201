@@ -1,7 +1,13 @@
 import { Reducer } from "react";
 
 import projectData from "./initialData";
-import { ProjectData, TaskActions, TaskDetails, TaskListAvailableAction, TaskListState } from "./types";
+import {
+  ProjectData,
+  TaskActions,
+  TaskDetails,
+  TaskListAvailableAction,
+  TaskListState,
+} from "./types";
 
 // Define the initial state
 export const initialState: TaskListState = {
@@ -10,7 +16,6 @@ export const initialState: TaskListState = {
   isError: false,
   errorMessage: "",
 };
-
 
 export const taskReducer: Reducer<TaskListState, TaskActions> = (
   state = initialState,

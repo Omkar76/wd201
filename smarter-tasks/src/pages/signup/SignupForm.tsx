@@ -3,17 +3,16 @@ import Button from "../shared/Button";
 import { API_ENDPOINT } from "../../config/constants";
 import { AuthContext, AuthResponse } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormData = {
-  organisationName : string
-  userName: string
-  userEmail : string
-  userPassword : string
-}
+  organisationName: string;
+  userName: string;
+  userEmail: string;
+  userPassword: string;
+};
 function SignupForm() {
-  const onSubmit :SubmitHandler<FormData> = async (formData : FormData) =>{
-
+  const onSubmit: SubmitHandler<FormData> = async (formData: FormData) => {
     try {
       const response = await fetch(`${API_ENDPOINT}/organisations`, {
         method: "POST",
@@ -38,8 +37,12 @@ function SignupForm() {
     } catch (error) {
       console.error("Sign-up failed:", error);
     }
-  }
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
   const authContext = useContext(AuthContext);
 
@@ -75,12 +78,15 @@ function SignupForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-1 m-1">
-        <label htmlFor="organisationName" className="block text-white font-semibold mb-2">
+        <label
+          htmlFor="organisationName"
+          className="block text-white font-semibold mb-2"
+        >
           Organization Name
         </label>
 
         <input
-          {...register('organisationName', {required : true})}
+          {...register("organisationName", { required: true })}
           id="organisationName"
           placeholder="Example Org"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
@@ -88,12 +94,15 @@ function SignupForm() {
       </div>
 
       <div className="p-1 m-1">
-        <label htmlFor="userName" className="block text-white font-semibold mb-2">
+        <label
+          htmlFor="userName"
+          className="block text-white font-semibold mb-2"
+        >
           Username
         </label>
 
         <input
-          {...register('userName', {required : true})}
+          {...register("userName", { required: true })}
           id="userName"
           placeholder="John"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
@@ -101,34 +110,41 @@ function SignupForm() {
       </div>
 
       <div className="p-1 m-1">
-        <label htmlFor="userEmail" className="block text-white font-semibold mb-2">
+        <label
+          htmlFor="userEmail"
+          className="block text-white font-semibold mb-2"
+        >
           Email
         </label>
 
         <input
           id="userEmail"
-          {...register('userEmail', {required : true})}
+          {...register("userEmail", { required: true })}
           placeholder="john@example.com"
           type="userEmail"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
         />
-
       </div>
 
       <div className="p-1 m-1">
-        <label htmlFor="userPassword" className="block text-white font-semibold mb-2">
+        <label
+          htmlFor="userPassword"
+          className="block text-white font-semibold mb-2"
+        >
           Password
         </label>
 
         <input
-          {...register('userPassword', {required : true})}
-          id = "userPassword"
+          {...register("userPassword", { required: true })}
+          id="userPassword"
           placeholder="********"
           type="password"
           className="p-2 border rounded-lg outline-none bg-gray-800 text-white border-violet-500 w-full"
         />
       </div>
-      <Button type="submit" className="mt-3">Sign Up</Button>
+      <Button type="submit" className="mt-3">
+        Sign Up
+      </Button>
     </form>
   );
 }

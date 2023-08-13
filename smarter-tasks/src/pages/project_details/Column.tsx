@@ -15,7 +15,6 @@ const Title = (props: React.PropsWithChildren) => {
   return <h3 className="p-2 font-semibold">{props.children}</h3>;
 };
 
-
 interface Props {
   column: ColumnData;
   tasks: TaskDetails[];
@@ -48,6 +47,5 @@ const Column: React.FC<Props> = (props) => {
     </Container>
   );
 };
-
 
 export default Column;

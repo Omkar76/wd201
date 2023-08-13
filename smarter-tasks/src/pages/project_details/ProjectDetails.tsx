@@ -13,7 +13,7 @@ const ProjectDetails = () => {
   let { projectID } = useParams();
 
   useEffect(() => {
-    console.log("projetID",projectID)
+    console.log("projetID", projectID);
     if (projectID) refreshTasks(taskDispatch, projectID);
   }, [projectID, taskDispatch]);
 
@@ -43,7 +43,7 @@ const ProjectDetails = () => {
           </button>
         </Link>
       </div>
-      <Outlet/>
+      <Outlet />
       <div className="grid grid-cols-1 gap-2">
         <DragDropList data={tasksState.projectData} />
       </div>

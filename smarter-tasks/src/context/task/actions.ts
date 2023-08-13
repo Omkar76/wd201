@@ -1,11 +1,11 @@
 // Import required type annotations
 import { API_ENDPOINT } from "../../config/constants";
 import {
-    ProjectData,
-    TaskDetails,
-    TaskDetailsPayload,
-    TaskListAvailableAction,
-    TasksDispatch,
+  ProjectData,
+  TaskDetails,
+  TaskDetailsPayload,
+  TaskListAvailableAction,
+  TasksDispatch,
 } from "./types";
 
 export const deleteTask = async (
@@ -80,79 +80,82 @@ export const updateTask = async (
 };
 
 export const addTask = async (
-    dispatch: TasksDispatch,
-    projectID: string,
-    task: TaskDetailsPayload
+  dispatch: TasksDispatch,
+  projectID: string,
+  task: TaskDetailsPayload
 ) => {
-    const token = localStorage.getItem("authToken") ?? "";
-    try {
-        // The following action will toggle `isLoading` to `true`
-        dispatch({ type: TaskListAvailableAction.CREATE_TASK_REQUEST });
+  const token = localStorage.getItem("authToken") ?? "";
+  try {
+    // The following action will toggle `isLoading` to `true`
+    dispatch({ type: TaskListAvailableAction.CREATE_TASK_REQUEST });
 
-        // Invoke the backend server with POST request and create a task.
-        const response = await fetch(
-            `${API_ENDPOINT}/projects/${projectID}/tasks/`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(task),
-            }
-        );
+    // Invoke the backend server with POST request and create a task.
+    const response = await fetch(
+      `${API_ENDPOINT}/projects/${projectID}/tasks/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(task),
+      }
+    );
 
-        if (!response.ok) {
-            throw new Error("Failed to create task");
-        }
-        // Turn `isLoading` to `false`
-        dispatch({ type: TaskListAvailableAction.CREATE_TASK_SUCCESS});
-        refreshTasks(dispatch, projectID);
-    } catch (error) {
-        console.error("Operation failed:", error);
-        // Update error status in the state.
-        dispatch({
-            type: TaskListAvailableAction.CREATE_TASK_FAILURE,
-            payload: "Unable to create task",
-        });
+    if (!response.ok) {
+      throw new Error("Failed to create task");
     }
+    // Turn `isLoading` to `false`
+    dispatch({ type: TaskListAvailableAction.CREATE_TASK_SUCCESS });
+    refreshTasks(dispatch, projectID);
+  } catch (error) {
+    console.error("Operation failed:", error);
+    // Update error status in the state.
+    dispatch({
+      type: TaskListAvailableAction.CREATE_TASK_FAILURE,
+      payload: "Unable to create task",
+    });
+  }
 };
 
-export const reorderTasks = (dispatch: TasksDispatch, newState: ProjectData) => {
-    dispatch({ type: TaskListAvailableAction.REORDER_TASKS, payload: newState })
-}
+export const reorderTasks = (
+  dispatch: TasksDispatch,
+  newState: ProjectData
+) => {
+  dispatch({ type: TaskListAvailableAction.REORDER_TASKS, payload: newState });
+};
 
 export const refreshTasks = async (
-    dispatch: TasksDispatch,
-    projectID: string
-  ) => {
-    const token = localStorage.getItem("authToken") ?? "";
-    try {
-      dispatch({ type: TaskListAvailableAction.FETCH_TASKS_REQUEST });
-      const response = await fetch(
-        `${API_ENDPOINT}/projects/${projectID}/tasks`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      if (!response.ok) {
-        throw new Error("Failed to create project");
+  dispatch: TasksDispatch,
+  projectID: string
+) => {
+  const token = localStorage.getItem("authToken") ?? "";
+  try {
+    dispatch({ type: TaskListAvailableAction.FETCH_TASKS_REQUEST });
+    const response = await fetch(
+      `${API_ENDPOINT}/projects/${projectID}/tasks`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
+    );
 
-      const data = await response.json();
-      dispatch({
-        type: TaskListAvailableAction.FETCH_TASKS_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      console.error("Operation failed:", error);
-      dispatch({
-        type: TaskListAvailableAction.FETCH_TASKS_FAILURE,
-        payload: "Unable to load tasks",
-      });
+    if (!response.ok) {
+      throw new Error("Failed to create project");
     }
-  };
+
+    const data = await response.json();
+    dispatch({
+      type: TaskListAvailableAction.FETCH_TASKS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.error("Operation failed:", error);
+    dispatch({
+      type: TaskListAvailableAction.FETCH_TASKS_FAILURE,
+      payload: "Unable to load tasks",
+    });
+  }
+};

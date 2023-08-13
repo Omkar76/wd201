@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "./context/auth";
-import {ThemeProvider} from "./context/theme";
+import { ThemeProvider } from "./context/theme";
 import React from "react";
 
 const root = ReactDOM.createRoot(
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider>
     <AuthProvider>
-        <App/>
+      <App />
     </AuthProvider>
   </ThemeProvider>
 );

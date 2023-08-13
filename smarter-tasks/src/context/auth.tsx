@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
 
   const signin = (authData: AuthResponse) => {
-    if(!authData.token){
+    if (!authData.token) {
       throw new Error("Token not provided");
     }
     localStorage.setItem("authToken", authData.token);
