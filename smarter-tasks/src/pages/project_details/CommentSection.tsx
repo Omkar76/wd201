@@ -28,6 +28,7 @@ export function CommentSection() {
         }}
       >
         <input
+          id="commentBox"
           className="flex-1 p-2  outline-transparent border-2"
           value={commentText}
           onChange={(e) => {
@@ -35,7 +36,7 @@ export function CommentSection() {
           }}
         />
         <button
-          id="addCommentButton"
+          id="addCommentBtn"
           className="ml-auto bg-blue-600 text-white p-2 rounded-md"
         >
           Post Comment
