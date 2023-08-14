@@ -6,7 +6,7 @@ import { CommentsState } from "../../context/comment/reducer";
 import { useMembersState } from "../../context/members/context";
 export default function CommentListItems() {
   const state: CommentsState = useCommentsState();
-  const memberState = useMembersState();
+  // const memberState = useMembersState();
   const { comments, isLoading, isError, errorMessage } = state;
 
   if (comments.length === 0 && isLoading) {
@@ -18,8 +18,8 @@ export default function CommentListItems() {
   }
 
   function getUserName(id: number) {
-    const member = memberState?.members?.find((member) => member.id == id);
-    return member?.name;
+    // const member = memberState?.members?.find((member) => member.id == id);
+    return "aaaa"
   }
 
   return (

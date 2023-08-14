@@ -19,14 +19,14 @@ export let fetchComments = async (
         },
       }
     );
-    const data = await response.json();
-    data.comments = data.comments.sort((a : any, b : any)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    dispatch({ type: "FETCH_COMMENTS_SUCCESS", payload: data });
+    let comments = await response.json();
+    comments = comments.sort((a : any, b : any)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    dispatch({ type: "FETCH_COMMENTS_SUCCESS", payload: comments });
   } catch (error) {
-    console.log("Error fetching projects:", error);
+    console.log("Error fetching comments:", error);
     dispatch({
       type: "FETCH_COMMENTS_FAILURE",
-      payload: "Unable to load members",
+      payload: "Unable to load comments",
     });
   }
 };
