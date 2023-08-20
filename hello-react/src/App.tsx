@@ -1,10 +1,10 @@
 import TaskCard from "./TaskCard";
-import {Task} from "./TaskCard"
+import { Task } from "./TaskCard";
 class DateUtil {
   static _oneday = 60 * 60 * 24 * 1000;
 
-  static format(date : Date) {
-    return date.toLocaleDateString("en-IN", {day : "numeric", month : "long" });
+  static format(date: Date) {
+    return date.toLocaleDateString("en-IN", { day: "numeric", month: "long" });
   }
 
   static get today() {
@@ -20,9 +20,8 @@ class DateUtil {
   }
 }
 
-
 function App() {
-  const pendingTasks : Task[] = [
+  const pendingTasks: Task[] = [
     // {
     //   title: "Build the website with static content",
     //   dueDate: DateUtil.format(DateUtil.tommorrow),
@@ -35,38 +34,37 @@ function App() {
     // }
   ];
 
-  const doneTasks : Task[] = [
-  //   {
-  //   title: "Build the website with static content",
-  //   dueDate: DateUtil.format(DateUtil.tommorrow),
-  //   completedAtDate: DateUtil.format(DateUtil.yesterday),
-  //   // assigneeName: "Kekeh M"
-  // },
-  // {
-  //   title: "Get the approval from principal",
-  //   // dueDate: "22nd March",
-  //   completedAtDate: "22nd March",
-  //   assigneeName: "Bro please"
-  // }
-];
+  const doneTasks: Task[] = [
+    //   {
+    //   title: "Build the website with static content",
+    //   dueDate: DateUtil.format(DateUtil.tommorrow),
+    //   completedAtDate: DateUtil.format(DateUtil.yesterday),
+    //   // assigneeName: "Kekeh M"
+    // },
+    // {
+    //   title: "Get the approval from principal",
+    //   // dueDate: "22nd March",
+    //   completedAtDate: "22nd March",
+    //   assigneeName: "Bro please"
+    // }
+  ];
 
   return (
     <div className="flex flex-row m-auto justify-center">
       <div className="m-5">
         <h1 className="text-2xl font-bold">Pending tasks</h1>
-        {
-          pendingTasks.map(task => <TaskCard {...task} />)
-        }
+        {pendingTasks.map((task) => (
+          <TaskCard {...task} />
+        ))}
       </div>
       <div className="m-5">
         <h1 className="text-2xl font-bold">Done tasks</h1>
-        {
-          doneTasks.map(task => <TaskCard {...task} />)
-        }
+        {doneTasks.map((task) => (
+          <TaskCard {...task} />
+        ))}
       </div>
-
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,7 +1,8 @@
-import ProjectList from "./ProjectList";
-import React from "react";
+import React, { Suspense } from "react";
+
 import NewProject from "./NewProject";
-import ProjectListItems from "./ProjectListItems";
+import ErrorBoundary from "../../components/ErrorBoundary";
+const ProjectList = React.lazy(() => import("./ProjectList"));
 const Projects = () => {
   return (
     <>
@@ -10,7 +11,13 @@ const Projects = () => {
           <h2 className="text-2xl font-medium tracking-tight">Projects</h2>
           <NewProject />
         </div>
-        <ProjectList />
+        <ErrorBoundary>
+          <Suspense
+            fallback={<div className="suspense-loading">Loading...</div>}
+          >
+            <ProjectList />
+          </Suspense>
+        </ErrorBoundary>
       </>
     </>
   );

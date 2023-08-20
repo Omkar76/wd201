@@ -20,7 +20,10 @@ export let fetchComments = async (
       }
     );
     let comments = await response.json();
-    comments = comments.sort((a : any, b : any)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    comments = comments.sort(
+      (a: any, b: any) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
     dispatch({ type: "FETCH_COMMENTS_SUCCESS", payload: comments });
   } catch (error) {
     console.log("Error fetching comments:", error);
